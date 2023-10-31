@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="signupForm" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <div style="width: 300px; padding: 40px; border: 1px solid #e6e6e6; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h1 style="text-align: center; margin-bottom: 20px;">Sign Up</h1>
+
+    <form action="{% url 'signup' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Username" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+      <input type="email" name="email" placeholder="Email" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+      <input type="password" name="password1" placeholder="Password" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+      <input type="password" name="password2" placeholder="Confirm Password" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+      <button id="signupBtn" type="submit" style="width: 100%; background-color: #4CAF50; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer;">Sign Up</button>
+
+
+    </form>
+    <p style="text-align: center; margin-top: 20px;">Already have an account? <a href="{% url 'login' %}" style="color: #4CAF50; text-decoration: none;">Login</a></p>
+
+    {% if error_message %}
+      {% for error in error_message %}
+        <p style="color: red; text-align: center; margin-top: 10px;">{{ error }}</p>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  #signupForm {
+    transition: all 0.5s;
+  }
+
+  #signupForm.animate {
+    animation: slideUp 0.5s;
+  }
+
+  #signupBtn:hover {
+    background-color: #45a049;
+  }
+
+  a:hover {
+    color: #45a049;
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+</style>
+
+<script>
+  const signupForm = document.getElementById('signupForm');
+  const signupBtn = document.getElementById('signupBtn');
+
+  signupBtn.addEventListener('click', () => {
+    signupForm.classList.add('animate');
+    setTimeout(() => {
+      signupForm.submit();
+    }, 500);
+  });
+</script>
+{% endblock %}
+

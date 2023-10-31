@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+
+    .employee-detail-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        font-family: sans-serif;
+      }
+      
+      .employee-detail-page h1 {
+        font-size: 24px;
+        margin-top: 20px;
+      }
+      
+      .employee-detail-page .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 300px;
+        height: 300px;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #a5294b;
+        border-radius: 5px;
+        background-color: #d6f8f8;
+        font-family: sans-serif;
+      }
+      
+      .employee-detail-page .card dt {
+        font-size: 14px;
+        
+      }
+      
+      .employee-detail-page .card dd {
+        font-size: 18px;
+        margin-top: 5px;
+        font-weight: bold;
+      }
+      
+      .employee-detail-page a {
+        margin-top: 20px;
+      }
+      
+     
+      
+      .employee-detail-page .card:first-child {
+        order: 1;
+        transform: translate3d(0, -200px, 0);
+      }
+      
+      .employee-detail-page .card:second-child {
+        order: 2;
+        transform: translate3d(-150px, -100px, 0);
+      }
+      
+      .employee-detail-page .card:third-child {
+        order: 3;
+        transform: translate3d(150px, -100px, 0);
+      }
+      
+      .employee-detail-page .card:fourth-child {
+        order: 4;
+        transform: translate3d(0, 200px, 0);
+      }
+      
+      .employee-detail-page {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-gap: 10px;
+      }
+    
+      .employee-detail-page .card {
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 1% 75%, 1% 25%);
+      }
+      .head {
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 1% 75%, 1% 25%);
+      }
+      .head {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 300px;
+        height: 300px;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #a5294b;
+        border-radius: 5px;
+        background-color: #f9b9d5;
+        font-family: sans-serif;
+      }
+      
+      
+
+</style>
+
+<div class="employee-detail-page">
+
+    <div class="head">
+  <h1>Employee Detail</h1>
+</div>
+
+
+  <div class="card employee-name">
+    <dt>Employee Name</dt>
+    <dd>{{ employee.first_name }} {{ employee.last_name }}</dd>
+  </div>
+
+  <div class="card employee-email">
+    <dt>Email ID</dt>
+    <dd>{{ employee.email }}</dd>
+  </div>
+
+  <div class="card employee-department">
+    <dt>Department</dt>
+    <dd>{{ employee.department }}</dd>
+  </div>
+
+  <div class="card employee-start-date">
+    <dt>Start Date</dt>
+    <dd>{{ employee.start_date|date:'d-m-Y' }}</dd>
+  </div>
+
+  <div class="card employee-on-boarding-status">
+    <dt>Status</dt>
+{% if employee.is_onboarded == True %}
+  <dd>On Board</dd>
+{% else %}
+  <dd>Not On Board</dd>
+{% endif %}
+
+  </div>
+
+  <a href="{% url "employee_list" %}" class="btn btn-primary">Back to List</a>
+</div>
+{% endblock %}

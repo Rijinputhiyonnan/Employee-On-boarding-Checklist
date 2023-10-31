@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .view-icon {
+        color: green; 
+    }
+
+    .edit-icon {
+        color: blue; 
+    }
+
+    .delete-icon {
+        color: red; 
+    }
+</style>
+
+<h1>Employees</h1>
+
+<a href="{% url 'employee_create' %}" class="btn btn-primary mb-3">Add Employee</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Start Date</th>
+            <th>Is Onboarded</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.first_name }}</td>
+            <td>{{ employee.last_name }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.department }}</td>
+            <td>{{ employee.start_date }}</td>
+            <td>{{ employee.is_onboarded }}</td>
+            <td>
+                <a href="{% url 'employee_detail' employee.pk %}"><i class="fas fa-eye view-icon"></i></a>
+                <a href="{% url 'employee_update' employee.pk %}"><i class="fas fa-pen edit-icon edit-icon"></i></a>
+                <a href="{% url 'employee_delete' employee.pk %}"><i class="fas fa-trash delete-icon"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+{% endblock %}
